@@ -1,7 +1,6 @@
 import React from 'react';
 import { Image, ScrollView, SafeAreaView } from 'react-native';
 import { Block, Button } from 'galio-framework';
-import ListGallery from 'react-native-list-gallery';
 import ScrollGallery from '../components/ScrollGallery';
 
 function renderImage({ url }) {

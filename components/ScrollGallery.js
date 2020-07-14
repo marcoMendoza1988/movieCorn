@@ -13,15 +13,15 @@ export default function scrollGallery(props){
     function handleHandScroll({ nativeEvent: { contentOffset } }) {
         clearTimeout(timer);
     
-        const newPosition = Math.round(contentOffset.x / 120);
-        const scrollrPosition = newPosition * 120;
+        const newPosition = Math.round(contentOffset.x / 140);
+        const scrollrPosition = newPosition * 140;
         handleScroll(scrollrPosition);
         //setPosition(newPosition);
     }
 
     function handleTransitingSlide() {
         const newPosition = data.length > position + 1 ? position + 1 : 0;
-        const scrollrPosition = newPosition * 120;
+        const scrollrPosition = newPosition * 140;
     
         timer = setTimeout(() => {
           handleScroll(scrollrPosition);
