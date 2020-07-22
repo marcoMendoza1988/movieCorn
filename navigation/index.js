@@ -4,7 +4,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import * as React from 'react';
 
-import HomeScreen from '../screens/HomeScreen'
+import HomeScreen from '../screens/HomeScreen';
+import AnimeContentInfo from '../components/animeContentInfo';
 
 export default function navigation() {
     
@@ -14,6 +15,7 @@ export default function navigation() {
         <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen name="Home" component={HomeScreen} />
+                <Stack.Screen name="AnimeContent" component={AnimeContentInfo} />
             </Stack.Navigator>
         </NavigationContainer>
     )

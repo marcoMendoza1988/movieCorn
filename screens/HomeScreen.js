@@ -1,52 +1,69 @@
-import React from 'react';
-import { Image, ScrollView, SafeAreaView } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import { 
+    Image, 
+    ScrollView, 
+    SafeAreaView, 
+    TouchableHighlight, 
+    Dimensions 
+} from 'react-native';
 import { Block, Button } from 'galio-framework';
 import ScrollGallery from '../components/ScrollGallery';
+import fetchData from '../constants/fetchData';
 
-function renderImage({ url }) {
-    return <Block row space={'between'} width={140} style={{
-        height: 220,
-        padding: 5,
-    }}><Image  
-        style={{
-            height: 220,
-            width: '100%',
-        }}
-        source={{ uri: url }} 
-    /></Block>
+const { width } = Dimensions.get('screen');
+
+function renderImage(data, navigation) {
+    return (
+    <TouchableHighlight
+        activeOpacity={0.6}
+        underlayColor="#DDDDDD"
+        onPress={() => navigation.navigate('AnimeContent', { animeData: `${JSON.stringify(data)}` })}>
+        <Block row space={'between'} style={{
+            height: 'auto',
+            padding: 5,
+        }}>
+            <Image  
+                style={{ height: 220, width: '100%' }}
+                source={{ uri: data.url }} 
+            />
+        </Block>
+    </TouchableHighlight>)
 }
 
-const data = [
-    { url: 'https://cdn.pixabay.com/photo/2017/09/25/13/12/dog-2785074_1280.jpg' },
-    { url: 'https://cdn.pixabay.com/photo/2015/03/26/09/54/pug-690566_1280.jpg' },
-    { url: 'https://cdn.pixabay.com/photo/2016/12/13/05/15/puppy-1903313_1280.jpg' },
-    { url: 'https://cdn.pixabay.com/photo/2018/03/31/06/31/dog-3277416_1280.jpg' },
-    { url: 'https://cdn.pixabay.com/photo/2017/09/25/13/12/dog-2785074_1280.jpg' },
-    { url: 'https://cdn.pixabay.com/photo/2015/03/26/09/54/pug-690566_1280.jpg' },
-    { url: 'https://cdn.pixabay.com/photo/2016/12/13/05/15/puppy-1903313_1280.jpg' },
-    { url: 'https://cdn.pixabay.com/photo/2018/03/31/06/31/dog-3277416_1280.jpg' }
-]
-  
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
+    let [animeLisit, setAnimeList] = useState([])
+    let [animeLisit2, setAnimeList2] = useState([])
+    let [animeLisit3, setAnimeList3] = useState([])
+    let [animeLisit4, setAnimeList4] = useState([])
+
+    
+
+    useEffect(() =>{
+        fetchData("https://private-amnesiac-13b031-jikan.apiary-proxy.com/v3/genre/anime/1/1", setAnimeList)
+        fetchData("https://private-amnesiac-13b031-jikan.apiary-proxy.com/v3/genre/anime/2/1", setAnimeList2)
+        fetchData("https://private-amnesiac-13b031-jikan.apiary-proxy.com/v3/genre/anime/3/1", setAnimeList3)
+        fetchData("https://private-amnesiac-13b031-jikan.apiary-proxy.com/v3/genre/anime/4/1", setAnimeList4)
+    })
+    
     return (
-        <SafeAreaView>
+        <SafeAreaView  style={{backgroundColor: '#000'}}>
             <ScrollView>
                 <Block flex>
-                    <Button>primary</Button>
+                    <Button link>Action:</Button>
                     <Block row>
-                        <ScrollGallery data={data} renderItem={renderImage}/>
+                        <ScrollGallery data={animeLisit} quantity={1} renderItem={renderImage} navigation={navigation} />
                     </Block>
-                    <Button>primary</Button>
+                    <Button>Adventure:</Button>
                     <Block row>
-                    <ScrollGallery data={data} renderItem={renderImage}/>
+                    <ScrollGallery data={animeLisit2} quantity={2} renderItem={renderImage} navigation={navigation}/>
                     </Block>
-                    <Button>primary</Button>
+                    <Button>Cars:</Button>
                     <Block row>
-                    <ScrollGallery data={data} renderItem={renderImage}/>
+                    <ScrollGallery data={animeLisit3} quantity={3} renderItem={renderImage} navigation={navigation}/>
                     </Block>
-                    <Button>primary</Button>
+                    <Button>Comedy:</Button>
                     <Block row>
-                        <ScrollGallery data={data} renderItem={renderImage}/>
+                        <ScrollGallery data={animeLisit4} quantity={4} renderItem={renderImage} navigation={navigation}/>
                     </Block>
                 </Block>
             </ScrollView>
