@@ -6,9 +6,9 @@ const { width } = Dimensions.get('screen');
 export default function scrollGallery(props){
     const scrollViewRef = useRef();
     let timer = null, animated = false;
-    let _width = (Number(width) / props.quantity) - 10
+    let _width = (Number(width) / props.quantity)
 
-    console.log(_width)
+    //console.log(_width)
     function handleScroll(scrollrPosition) {
         const x = scrollrPosition;
         scrollViewRef.current.scrollTo({ x, amimated: true });
@@ -44,7 +44,7 @@ export default function scrollGallery(props){
             style={{
                 flex: 1,
                 borderRadius: 10,
-                marginBottom: 10
+                marginBottom: 10,
                 }}
             >
             <ScrollView
@@ -55,7 +55,7 @@ export default function scrollGallery(props){
             >
                 {props.data.map((item, key) => (
                 <View key={key} style={{ width: _width }}>
-                    {props.renderItem(item, props.navigation ? props.navigation : null)}
+                    {props.renderItem(item, props.navigation ? props.navigation : null, props.heightImg && props.heightImg)}
                 </View>
                 ))}
             </ScrollView>
