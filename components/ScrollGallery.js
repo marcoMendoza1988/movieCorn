@@ -16,28 +16,11 @@ export default function scrollGallery(props){
     
     function handleHandScroll({ nativeEvent: { contentOffset } }) {
         clearTimeout(timer);
-        const newPosition = Math.round(contentOffset.x / _width);
+        const newPosition = Math.round(contentOffset.x / (_width));
         const scrollrPosition = newPosition * _width;
         handleScroll(scrollrPosition);
         //setPosition(newPosition);
     }
-
-    function handleTransitingSlide() {
-        const newPosition = data.length > position + 1 ? position + 1 : 0;
-        const scrollrPosition = newPosition * _width;
-    
-        timer = setTimeout(() => {
-          handleScroll(scrollrPosition);
-          setPosition(newPosition);
-        }, delay);
-    }
-
-    useEffect(() => {
-        if (animated) handleTransitingSlide();
-        return () => {
-          clearTimeout(timer);
-        };
-    });
 
     return (
         <View
@@ -59,20 +42,6 @@ export default function scrollGallery(props){
                 </View>
                 ))}
             </ScrollView>
-            {false && (
-                <View style={{
-                    flex: 1,
-                    flexDirection: 'row',
-                    justifyContent: 'center'
-                    }}>
-                {data.map((dot, dotKey) => {
-                    if (typeof renderDot === 'function')
-                    //return renderDot({ active: position === dotKey }, dotKey);
-                    //return <Dot key={`dot-${dotKey}`} active={position === dotKey} />;
-                    return ;
-                })}
-                </View>
-            )}
         </View>
     )
 }

@@ -8,26 +8,31 @@ import {
 } from 'react-native';
 import { Block, Button, Text } from 'galio-framework';
 import ScrollGallery from '../components/ScrollGallery';
+import { Entypo } from '@expo/vector-icons'; 
+
 import fetchData from '../constants/fetchData';
 
 const { width } = Dimensions.get('screen');
 
 function renderImage(data, navigation, heightImg) {
     return (
-    <TouchableHighlight
-        activeOpacity={0.6}
-        underlayColor="#DDDDDD"
-        onPress={() => navigation.navigate('AnimeContent', { animeData: `${JSON.stringify(data)}` })}>
-        <Block row space={'between'} style={{
-            height: 'auto',
-            padding: 3,
-        }}>
+    <Block flex style={{
+        padding: 3,
+    }}>       
+        <TouchableHighlight
+            activeOpacity={0.6}
+            underlayColor="#DDDDDD"
+            onPress={() => navigation.navigate('AnimeContent', { animeData: `${JSON.stringify(data)}` })}>
             <Image  
-                style={{ height: heightImg ? heightImg : 220, width: '100%' }}
+                style={{ height: heightImg ? heightImg : 190, width: '100%', position: 'relative' }}
                 source={{ uri: data.url }} 
-            />
+            />    
+        </TouchableHighlight>
+        <Block row style={{ position: 'relative', padding: 4, backgroundColor: '#06B2CC', height: 80 }}>
+            <Text size={12} style={{color: '#FFFFFF' }}>{data.title}</Text>
+            <Entypo style={{ position: 'absolute', bottom: 4, right: 0 }} name="dots-three-vertical" size={24} color="black" />
         </Block>
-    </TouchableHighlight>)
+    </Block>)
 }
 
 function renderCover_page(data, navigation, heightImg) {

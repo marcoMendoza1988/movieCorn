@@ -29,7 +29,7 @@ export default function AnimeContentInfo({ route }){
                                     paddingBottom: 5,
                                     paddingRight: 15,
                                     paddingLeft: 15, 
-                                    backgroundColor: '#ff8000', 
+                                    backgroundColor: '06B2CC', 
                                     color: '#FFFFFF', 
                                     borderRadius: 10 
                                 }}>{res.name.toUpperCase()}</Text>
